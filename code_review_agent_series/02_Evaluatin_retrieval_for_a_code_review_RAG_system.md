@@ -75,7 +75,7 @@ Here's the tricky part. Each test has about 4–5 gt results but ~35 non-gt resu
 
 The distributions do overlap—as expected—but there's about 0.3 distance between their medians.
 
-![[core_review_agent-series/assets/distance_distribution_histogram.png]]
+![distance distribution histogram](assets/distance_distribution_histogram.png)
 
 Given that all embedded strings describe code (and are therefore semantically similar to begin with), this separation is meaningful. Cosine distance normally ranges from 0 (semantically identical) to 2 (semantically opposite). Here we can see that max values reach about 1.2, but gt results cluster closer to 0 than non-gt results. Since all bins in this histogram have equal width, we can clearly see that gt memories are more likely to have lower cosine distance to the query than non-gt memories. That's what I needed to know.
 
@@ -89,7 +89,7 @@ _Side note_: I won't paste the Python code. Any LLM can generate this—it's jus
 
 Below are the key metrics plotted as arithmetic mean values across all test cases for each threshold. Arithmetic mean is fairly naive, but in my case the test cases have very similar numbers of gt and non-gt records, so weighting isn't necessary. To clarify the aggregation: if at threshold 0.2 only one test returned results (with precision 1.0 and MRR 1.0) while the remaining nine tests returned nothing (contributing zeros), I simply averaged them, placing 0.1 as the precision for that threshold.
 
-![[code_review_agent_series/assets/threshold_sweep_metrics.png]]
+![Threshold sweep metrics](assets/threshold_sweep_metrics.png)
 
 The plot splits into zones:
 
@@ -104,7 +104,7 @@ Given that my ground truth is synthetic, I might want to be slightly less restri
 
 I also calculated metrics for top@k results. I treated this as supplementary research alongside the threshold analysis. We should observe certain expected patterns if the system is behaving correctly.
 
-![[code_review_agent_series/assets/topk_metrics.png]]
+![Top@k metrics](code_review_agent_series/assets/topk_metrics.png)
 
 Instead of filtering by distance threshold, I kept only the first k results (k = 1 to 20). This plot looks different from the threshold sweep—there's no "dead zone" because I'm working only with retrieved records. However, I don't know the actual distance of the kth result. This analysis simply verifies that the retrieval system behaves as expected.
 
