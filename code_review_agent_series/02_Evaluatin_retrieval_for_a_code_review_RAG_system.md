@@ -104,7 +104,7 @@ Given that my ground truth is synthetic, I might want to be slightly less restri
 
 I also calculated metrics for top@k results. I treated this as supplementary research alongside the threshold analysis. We should observe certain expected patterns if the system is behaving correctly.
 
-![Top@k metrics](code_review_agent_series/assets/topk_metrics.png)
+![Top@k metrics](assets/topk_metrics.png)
 
 Instead of filtering by distance threshold, I kept only the first k results (k = 1 to 20). This plot looks different from the threshold sweep—there's no "dead zone" because I'm working only with retrieved records. However, I don't know the actual distance of the kth result. This analysis simply verifies that the retrieval system behaves as expected.
 
